@@ -30,6 +30,12 @@ function getBotResponse(message) {
         return "Kamu tidak sendiri. Banyak orang pernah merasakan hal yang sama. Aku bersamamu di sini.";
     } else if (lower.includes("terima kasih")) {
         return "Sama-sama 😊 Aku senang bisa membantumu.";
+    } else if (lower.includes("takut") || lower.includes("cemas")) {
+        return "Rasa takut dan cemas itu wajar. Kamu tidak harus melawan semuanya sendiri.";
+    } else if (lower.includes("bingung") || lower.includes("gagal")) {
+        return "Kegagalan bukan akhir, tapi bagian dari perjalanan. Kamu masih punya waktu dan nilai.";
+    } else if (lower.includes("butuh teman")) {
+        return "Aku di sini untuk mendengarkanmu. Kadang, cukup ada yang mau mendengar, itu sudah menenangkan.";
     } else {
         return "Aku mengerti. Ceritakan saja pelan-pelan. Aku mendengarkan.";
     }
