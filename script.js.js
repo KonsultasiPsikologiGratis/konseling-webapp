@@ -7,10 +7,12 @@ function sendMessage() {
     addMessage("user", message);
     input.value = "";
 
+    showTyping(true);
     setTimeout(() => {
         const response = getBotResponse(message);
+        showTyping(false);
         addMessage("bot", response);
-    }, 500);
+    }, 1200);
 }
 
 function addMessage(sender, text) {
@@ -20,6 +22,23 @@ function addMessage(sender, text) {
     messageDiv.innerText = text;
     chatBox.appendChild(messageDiv);
     chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function showTyping(isTyping) {
+    const chatBox = document.getElementById("chatBox");
+    const existing = document.getElementById("typing");
+    if (isTyping) {
+        if (!existing) {
+            const typingDiv = document.createElement("div");
+            typingDiv.className = "message bot";
+            typingDiv.id = "typing";
+            typingDiv.innerText = "Sedang mengetik...";
+            chatBox.appendChild(typingDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    } else {
+        if (existing) chatBox.removeChild(existing);
+    }
 }
 
 function getBotResponse(message) {
@@ -84,7 +103,23 @@ function getBotResponse(message) {
         "Jangan pernah merasa sendirian. Banyak orang yang peduli padamu.",
         "Laporkan perundungan yang kamu alami, jangan biarkan mereka terus menyakitimu."
     ];
+    const trauma = [
+        "Luka batin memang tak terlihat, tapi dampaknya nyata. Kamu berhak untuk sembuh.",
+        "Menghadapi trauma bukan hal mudah. Pelan-pelan, kamu sedang memulihkan dirimu.",
+        "Cerita traumamu penting. Kamu layak didengar dan dipahami.",
+        "Berani bertahan setelah trauma adalah kekuatan luar biasa. Aku bangga padamu.",
+        "Kamu tidak salah. Kamu sedang dalam proses pulih, dan itu sangat manusiawi."
+    ];
+    const isolasi = [
+        "Rasa sepi bisa sangat menyakitkan. Aku di sini untuk menemanimu.",
+        "Meski kamu merasa sendiri, ada banyak orang yang peduli. Termasuk aku.",
+        "Kesepian bukan kelemahan. Itu tanda kamu butuh ruang untuk dimengerti.",
+        "Aku tahu rasanya merasa terputus dari dunia. Tapi kamu tidak sendirian.",
+        "Mungkin tak ada yang tahu, tapi aku mendengarkanmu sekarang."
+    ];
 
+    if (lower.includes("trauma")) return random(trauma);
+    if (lower.includes("sendiri") || lower.includes("kesepian") || lower.includes("isolasi")) return random(isolasi);
     if (lower.includes("kehilangan")) return random(kehilangan);
     if (lower.includes("cinta") || lower.includes("putus")) return random(cinta);
     if (lower.includes("kerja") || lower.includes("sekolah") || lower.includes("tugas")) return random(kerja);
